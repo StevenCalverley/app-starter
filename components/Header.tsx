@@ -1,11 +1,17 @@
 import { useSession, signOut, signIn } from "next-auth/react";
+import Link from "next/link";
 
 const Header = () => {
   const { data } = useSession();
   return (
     <header className="bg-blue-600 text-white">
       <div className="flex items-center justify-between container mx-auto h-16">
-        <p className="font-semibold text-lg tracking-wide">App Header</p>
+        <nav className="flex space-x-2 items-baseline">
+          <Link href="/">
+            <a className="font-semibold text-lg tracking-wide">App Header</a>
+          </Link>
+          <Link href="/test">Test</Link>
+        </nav>
         {data && (
           <div className="flex items-center space-x-2">
             <p>{data.user?.email}</p>
