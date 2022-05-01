@@ -12,16 +12,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto py-12">
+      <section className="container mx-auto py-12">
         <h1 className="font-bold text-2xl">App Starter</h1>
         {data && <p>{data.user?.email}</p>}
-      </main>
-
-      <footer className="bg-gray-900 text-white">
-        <div className="container mx-auto h-16 flex items-center justify-center">
-          <p>App Starter &copy; {new Date().getFullYear()}</p>
-        </div>
-      </footer>
+      </section>
     </>
   );
 };
