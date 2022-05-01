@@ -1,7 +1,9 @@
-import type { NextPage } from "next";
+import type { NextPage, GetServerSidePropsContext } from "next";
+import { useSession, getSession } from "next-auth/react";
 import Head from "next/head";
 
 const Home: NextPage = () => {
+  const { data, status } = useSession();
   return (
     <>
       <Head>
@@ -12,6 +14,7 @@ const Home: NextPage = () => {
 
       <main className="container mx-auto py-12">
         <h1 className="font-bold text-2xl">App Starter</h1>
+        {data && <p>{data.user?.email}</p>}
       </main>
 
       <footer className="bg-gray-900 text-white">
@@ -24,3 +27,11 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
+}
