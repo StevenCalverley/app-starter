@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from "next";
-import { getCsrfToken } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 const VerifyRequest = () => {
   return (
@@ -25,3 +25,18 @@ const VerifyRequest = () => {
 };
 
 export default VerifyRequest;
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}

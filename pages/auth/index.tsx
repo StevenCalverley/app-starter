@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from "next";
-import { getCsrfToken } from "next-auth/react";
+import { getCsrfToken, getSession } from "next-auth/react";
 
 const CheckEmail = () => {
   return (
@@ -68,6 +68,15 @@ const Login = ({ csrfToken }: LoginProps) => {
 export default Login;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   const csrfToken = await getCsrfToken(context);
   return {
     props: { csrfToken },
