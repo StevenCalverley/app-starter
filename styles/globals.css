@@ -4,6 +4,6 @@
 
 @layer components {
   #__next {
-    @apply h-screen flex flex-col;
+    @apply h-screen flex flex-col bg-gray-50;
   }
 }
